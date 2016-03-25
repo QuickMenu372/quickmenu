@@ -40,12 +40,12 @@ var router = express.Router(); // get an instance of the express Router
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
     res.json({
-        message: 'api!'
+        message: 'api!!!yippie!!'
     });
 });
 
 
-
+var appRoot = process.env.PWD;
 
 app.get('/setup', function(req, res) {
 
@@ -67,8 +67,37 @@ app.get('/setup', function(req, res) {
 
 
 
+router.route('/upload', function(req, res) {
+    console.log(req.files.image.originalFilename);
+    console.log(req.files.image.path);
+        fs.readFile(req.files.image.path, function (err, data){
+		var dirname = "/home/arjun/Music/file-upload";
+	var newPath = dirname + "/uploads/" +   req.files.image.originalFilename;
+        fs.writeFile(newPath, data, function (err) {
+        if(err){
+        res.json({'response':"Error"});
+        }else {
+        res.json({'response':"Saved"});
+}
+});
+});
+});
 
 
+
+
+
+
+
+app.get('/uploads/:file', function (req, res){
+		file = req.params.file;
+		var dirname = appRoot;
+		var img = fs.readFileSync(dirname + "/uploads/" + file);
+		res.writeHead(200, {'Content-Type': 'image/jpg' });
+		res.end(img, 'binary');
+
+});
+};
 
 
 
@@ -622,10 +651,6 @@ router.route('/order/:order_id')
         });
     });
 });
-
-
-
-
 
 
 
