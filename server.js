@@ -97,7 +97,7 @@ app.get('/uploads/:file', function (req, res){
 		res.end(img, 'binary');
 
 });
-};
+
 
 
 
