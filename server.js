@@ -6,7 +6,8 @@ var User = require('./app/models/user');
 // BASE SETUP
 // =============================================================================
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/menutest1')
+ var uri = process.env.MONGOLAB_URI||'mongodb://localhost:27017/menutest';
+mongoose.connect(uri)
 ; 
 var express = require('express');
 var app = express();
