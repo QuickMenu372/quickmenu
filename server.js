@@ -3,10 +3,11 @@ var Menu = require('./app/models/menu');
 var Order = require('./app/models/orders');
 var Feed = require('./app/models/feed');
 var User = require('./app/models/user');
+var fs = require('fs');
 // BASE SETUP
 // =============================================================================
 var mongoose = require('mongoose');
- var uri = process.env.MONGOLAB_URI||'mongodb://localhost:27017/menutest';
+ var uri = process.env.MONGOLAB_URI||'mongodb://localhost:27017/menutest1';
 mongoose.connect(uri)
 ; 
 var express = require('express');
@@ -67,38 +68,6 @@ app.get('/setup', function(req, res) {
 
 
 
-router.route('/upload', function(req, res) {
-    console.log(req.files.image.originalFilename);
-    console.log(req.files.image.path);
-        fs.readFile(req.files.image.path, function (err, data){
-		var dirname = appRoot;
-	var newPath = dirname + "/uploads/" +   req.files.image.originalFilename;
-        fs.writeFile(newPath, data, function (err) {
-        if(err){
-        res.json({'response':"Error"});
-        }else {
-        res.json({'response':"Saved"});
-}
-});
-});
-});
-
-
-
-
-
-
-
-app.get('/uploads/:file', function (req, res){
-		file = req.params.file;
-		var dirname = appRoot;
-		var img = fs.readFileSync(dirname + "/uploads/" + file);
-		res.writeHead(200, {'Content-Type': 'image/jpg' });
-		res.end(img, 'binary');
-
-});
-
-
 
 
 
@@ -137,6 +106,41 @@ router.route('/login')
 
         res.json(users);
     });
+});
+
+
+router.route('/upload')
+.post(function(req, res) {
+    console.log(req.files.image.originalFilename);
+    console.log(req.files.image.path);
+        fs.readFile(req.files.image.path, function (err, data){
+		var dirname = appRoot;
+	var newPath = dirname + "/uploads/" +   req.files.image.originalFilename;
+        fs.writeFile(newPath, data, function (err) {
+        if(err){
+        res.json({'response':"Error"});
+        }else {
+        res.json({'response':"Saved"});
+}
+});
+});
+});
+
+
+
+
+
+
+
+router.route('/uploads/:file')
+
+.get(function(req,res){
+		file = req.params.file;
+		var dirname = appRoot;
+		var img = fs.readFileSync(dirname + "/uploads/" + file);
+		res.writeHead(200, {'Content-Type': 'image/jpg' });
+		res.end(img, 'binary');
+
 });
 
 
@@ -291,9 +295,11 @@ router.route('/menu')
     var menu = new Menu();  
     menu.name = req.body.name;
     menu.cost = req.body.cost;
-    menu.id = req.body.id;
+    menu.veg = req.body.veg;
     menu.type = req.body.type;
-    menu.part = req.body.part;
+    menu.category = req.body.category;
+menu.pic = req.body.pic;
+menu.description = req.body.description;
 
 
 
@@ -490,10 +496,13 @@ router.route('/menus/:menu_id')
             res.send(err);
 
         menu.name = req.body.name;
-        menu.cost = req.body.cost;
-        menu.id = req.body.id;
-        menu.type = req.body.type;
-        menu.part = req.body.part;
+    menu.cost = req.body.cost;
+    menu.veg = req.body.veg;
+    menu.type = req.body.type;
+    menu.category = req.body.category;
+menu.pic = req.body.pic;
+menu.description = req.body.description;
+
 
         menu.save(function(err) {
             if (err)
