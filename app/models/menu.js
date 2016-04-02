@@ -9,6 +9,7 @@ category: String,
 veg:Boolean,
 pic:String,
 description:String
+enable:Boolean
 });
 
 MenuSchema.virtual('food').get(function() {
