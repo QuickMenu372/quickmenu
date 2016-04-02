@@ -28,31 +28,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-var Grid = require('gridfs-stream');
-Grid.mongo = mongoose.mongo;
 
-
-
-conn.once('open', function() {
-    console.log('open');
-    var gfs = Grid(conn.db);
-
-    // streaming to gridfs
-    //filename to store in mongodb
-    var writestream = gfs.createWriteStream({
-        filename: 'mongo_file.txt'
-    });
-    fs.createReadStream('/home/arjun/2.jpg').pipe(writestream);
-
-    writestream.on('close', function(file) {
-        // do something with `file`
-        console.log(file.filename + 'Written To DB');
-    });
-
-
-
-
-});
 
 
 
@@ -323,6 +299,7 @@ router.route('/menu')
     menu.type = req.body.type;
     menu.category = req.body.category;
     menu.pic = req.body.pic;
+    menu.enable = req.body.enable;
     menu.description = req.body.description;
 
 

@@ -299,6 +299,7 @@ router.route('/menu')
     menu.type = req.body.type;
     menu.category = req.body.category;
     menu.pic = req.body.pic;
+    menu.enable = req.body.enable;
     menu.description = req.body.description;
 
 
@@ -494,6 +495,7 @@ router.route('/menus/:menu_id')
         menu.type = req.body.type;
         menu.category = req.body.category;
         menu.pic = req.body.pic;
+menu.enable = req.body.enable;
         menu.description = req.body.description;
 
 
