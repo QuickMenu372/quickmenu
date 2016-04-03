@@ -231,7 +231,7 @@ router.post('/authenticate', function(req, res) {
                 // if user is found and password is right
                 // create a token
                 var token = jwt.sign(user, app.get('superSecret'), {
-                    expiresInMinutes: 1440 // expires in 24 hours
+                    expiresInMinutes: 144000 // expires in 24 hours
                 });
 
                 // return the information including token as JSON
@@ -301,7 +301,8 @@ router.route('/menu')
     menu.pic = req.body.pic;
     menu.enable = req.body.enable;
     menu.description = req.body.description;
-
+    menu.offerEnable = req.body.offerEnable;
+    menu.offerDiscount = req.body.offerDiscount;
 
 
 
@@ -495,7 +496,9 @@ router.route('/menus/:menu_id')
         menu.type = req.body.type;
         menu.category = req.body.category;
         menu.pic = req.body.pic;
-menu.enable = req.body.enable;
+        menu.enable = req.body.enable;
+        menu.offerEnable = req.body.offerEnable;
+menu.offerDiscount = req.body.offerDiscount;
         menu.description = req.body.description;
 
 
