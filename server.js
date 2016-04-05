@@ -334,6 +334,8 @@ router.route('/order')
 
     var order = new Order();
     order.table = req.body.table;
+ order.orderStatus = req.body.orderStatus;
+ order.cost = req.body.cost;
     if (req.body.food1 != null)
         order.serve.push({
             food: req.body.food1,
@@ -550,6 +552,8 @@ router.route('/order/:order_id')
 
         // create a new instance of the order model
         order.table = req.body.table;
+ order.orderStatus = req.body.orderStatus;
+ order.cost = req.body.cost;
         if (req.body.food1 != null)
             order.serve.push({
                 food: req.body.food1,
