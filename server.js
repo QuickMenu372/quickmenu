@@ -701,6 +701,146 @@ status: req.body.status16
 
 
 
+
+
+
+/*
+router.route('/serve/:order_id/:serve_id')
+
+
+.get(function(req, res) {
+    Order.findOne({_id : req.params.order_id},{'serve.id' :req.params.serve_id}, function(err, order) {
+        if (err)
+            res.send(err);
+
+        res.json(order.serve);
+    });
+});
+
+*/
+router.route('/serve/:order_id/:serve_id')
+
+
+.get(function(req, res) {var k;
+    Order.findOne({_id : req.params.order_id}, function(err, order) {
+        if (err)
+            res.send(err);
+
+for(var i = 0;i<order.serve.length;i++)
+if(order.serve[i]._id==req.params.serve_id)
+   k =i;
+       res.json(order.serve[k]);
+
+    });
+}).put(function(req, res) {
+    Order.findOne({_id : req.params.order_id},function(err, order) {
+
+        if (err)
+            res.send(err);
+
+ for(var i = 0;i<order.serve.length;i++)
+if(order.serve[i]._id==req.params.serve_id){      
+order.serve[i].food = req.body.food;
+order.serve[i].quan = req.body.number;
+order.serve[i].status = req.body.status;
+}
+
+        order.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json({
+                message: 'Order updated!'
+            });
+        });
+
+    });
+})
+
+
+
+
+router.route('/addorder/:order_id/')
+
+
+.post(function(req, res) {
+Order.findById(req.params.order_id, function(err, order) {
+        if (err)
+            res.send(err);
+
+order.serve.push({
+            food: req.body.food,
+            quan: req.body.number,
+status: req.body.status
+
+        });
+
+order.save(function(err) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            message: 'sss'
+        });
+    });
+
+});
+
+
+});
+
+/*
+
+
+.put(function(req, res){
+Order.findOne({_id : req.params.order_id},function(err, order) {
+ if (err)
+            res.send(err);
+
+order.food = req.body.food;
+order.quan = req.body.quan;
+oder.status = req.body.status;
+
+menu.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json({
+                message: 'Menu updated!'
+            });
+});
+
+
+
+});
+
+.delete(function(req, res) {
+    User.remove({
+        _id: req.params.user_id
+    }, function(err, user) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            message: 'Successfully deleted'
+        });
+    });
+});
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
 app.use('/api', router);
 
 
