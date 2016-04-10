@@ -1,0 +1,8 @@
+var mongoose     = require('mongoose');
+var Schema       = mongoose.Schema;
+
+var RequestSchema =  new mongoose.Schema({
+    type: String,
+    comment: String
+});
+module.exports = mongoose.model('Feed', FeedSchema);

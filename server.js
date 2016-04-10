@@ -2,6 +2,7 @@
 var Menu = require('./app/models/menu');
 var Order = require('./app/models/orders');
 var Feed = require('./app/models/feed');
+var Request = require('./app/models/request');
 var User = require('./app/models/user');
 var fs = require('fs');
 // BASE SETUP
@@ -485,6 +486,39 @@ router.route('/feed')
             res.send(err);
 
         res.json(feeds);
+    });
+});
+
+
+
+
+router.route('/request')
+
+
+.post(function(req, res) {
+
+    var request = new Request();
+    request.type = req.body.type;
+    request.comment = req.body.comment;
+
+
+
+
+    request.save(function(err) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            message: 'feedback success'
+        });
+    });
+
+}).get(function(req, res) {
+    Request.find(function(err, requests) {
+        if (err)
+            res.send(err);
+
+        res.json(requests);
     });
 });
 
