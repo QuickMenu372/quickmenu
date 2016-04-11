@@ -583,6 +583,52 @@ menu.offerDiscount = req.body.offerDiscount;
 
 
 
+
+
+/*
+
+
+router.route('/iosmenus/:menu_id')
+
+
+.post(function(req, res) {
+
+Menu.findOneAndUpdate({_id:req.params.menu_id}, function(err, menu) {
+
+        if (err)
+            res.send(err);
+
+        menu.name = req.body.name;
+        menu.cost = req.body.cost;
+        menu.veg = req.body.veg;
+     
+        menu.description = req.body.description;
+
+
+        menu.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json({
+                message: 'Menu updated!'
+            });
+        });
+
+    });
+});
+
+
+
+
+*/
+
+
+
+
+
+
+
+
 router.route('/order/:order_id')
 
 
@@ -789,7 +835,19 @@ order.serve[i].status = req.body.status;
         });
 
     });
-})
+}).delete(function(req, res) {
+    Order.remove({
+        _id: req.params.order_id
+    }, function(err, order) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            message: 'Successfully deleted'
+        });
+    });
+});
+
 
 
 

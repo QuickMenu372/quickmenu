@@ -2,6 +2,7 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var RequestSchema =  new mongoose.Schema({
+table:Number,
     type: String,
     comment: String
 });

@@ -5,4 +5,4 @@ var RequestSchema =  new mongoose.Schema({
     type: String,
     comment: String
 });
-module.exports = mongoose.model('Feed', FeedSchema);
+module.exports = mongoose.model('Request', RequestSchema);
