@@ -836,16 +836,27 @@ order.serve[i].status = req.body.status;
 
     });
 }).delete(function(req, res) {
-    Order.remove({
-        _id: req.params.order_id
-    }, function(err, order) {
+
+
+Order.findOne({_id : req.params.order_id},function(err, order) {
+
         if (err)
             res.send(err);
 
-        res.json({
-            message: 'Successfully deleted'
+ for(var i = 0;i<order.serve.length;i++)
+if(order.serve[i]._id==req.params.serve_id){      
+order.serve[i].remove();
+}
+ order.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json({
+                message: 'Order updated!'
+            });
         });
     });
+
 });
 
 
