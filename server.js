@@ -350,6 +350,17 @@ router.route('/order')
     order.table = req.body.table;
 
  order.cost = req.body.cost;
+
+serve=[];
+for (var i in req.body.serve) {
+  var ser = req.body.serve[i];
+console.log(ser);
+  var serveObj = { food: ser['food'], quan: ser['number'], status: ser['status'] };
+ order.serve.push(serveObj);
+}
+
+
+/*
     if (req.body.food1 != null)
         order.serve.push({
             food: req.body.food1,
@@ -448,7 +459,7 @@ status: req.body.status15
 status: req.body.status16
         });
 
-
+*/
 
 
     order.save(function(err) {
