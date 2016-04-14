@@ -7,7 +7,7 @@ var BillSchema =  new mongoose.Schema({
     serve: [{
         food:ObjectId,
         quan:Number,
-status:Number
+
       
     }]
 

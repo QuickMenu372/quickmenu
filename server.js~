@@ -355,111 +355,11 @@ serve=[];
 for (var i in req.body.serve) {
   var ser = req.body.serve[i];
 console.log(ser);
-  var serveObj = { food: ser['food'], quan: ser['number'] };
+  var serveObj = { food: ser['food'], quan: ser['number'], status: ser['status'] };
  order.serve.push(serveObj);
 }
 
 
-/*
-    if (req.body.food1 != null)
-        order.serve.push({
-            food: req.body.food1,
-            quan: req.body.number1,
-status: req.body.status1
-
-        });
-    if (req.body.food2 != null)
-        order.serve.push({
-            food: req.body.food2,
-            quan: req.body.number2,
-status: req.body.status2
-        });
-    if (req.body.food3 != null)
-        order.serve.push({
-            food: req.body.food3,
-            quan: req.body.number3,
-status: req.body.status3
-        });
-    if (req.body.food4 != null)
-        order.serve.push({
-            food: req.body.food4,
-            quan: req.body.number4,
-status: req.body.status4
-        });
-    if (req.body.food5 != null)
-        order.serve.push({
-            food: req.body.food5,
-            quan: req.body.number5,
-status: req.body.status5
-        });
-    if (req.body.food6 != null)
-        order.serve.push({
-            food: req.body.food6,
-            quan: req.body.number6,
-status: req.body.status6
-        });
-    if (req.body.food7 != null)
-        order.serve.push({
-            food: req.body.food7,
-            quan: req.body.number7,
-status: req.body.status7
-        });
-    if (req.body.food8 != null)
-        order.serve.push({
-            food: req.body.food8,
-            quan: req.body.number8,
-status: req.body.status8
-        });
-    if (req.body.food9 != null)
-        order.serve.push({
-            food: req.body.food9,
-            quan: req.body.number9,
-status: req.body.status9
-        });
-    if (req.body.food16 != null)
-        order.serve.push({
-            food: req.body.food10,
-            quan: req.body.number10,
-status: req.body.status10
-        });
-    if (req.body.food11 != null)
-        order.serve.push({
-            food: req.body.food11,
-            quan: req.body.number11,
-status: req.body.status11
-        });
-    if (req.body.food12 != null)
-        order.serve.push({
-            food: req.body.food12,
-            quan: req.body.number12,
-status: req.body.status12
-        });
-    if (req.body.food13 != null)
-        order.serve.push({
-            food: req.body.food13,
-            quan: req.body.number13,
-status: req.body.status13
-        });
-    if (req.body.food14 != null)
-        order.serve.push({
-            food: req.body.food14,
-            quan: req.body.number14,
-status: req.body.status14
-        });
-    if (req.body.food15 != null)
-        order.serve.push({
-            food: req.body.food15,
-            quan: req.body.number15,
-status: req.body.status15
-        });
-    if (req.body.food16 != null)
-        order.serve.push({
-            food: req.body.food16,
-            quan: req.body.number16,
-status: req.body.status16
-        });
-
-*/
 
 
     order.save(function(err) {
@@ -490,7 +390,7 @@ router.route('/bill')
 .post(function(req, res) {
 
  var bill = new Bill();
-    bill.id = req.body.id;
+    bill.table = req.body.table;
 
  bill.cost = req.body.cost;
 serve=[];
@@ -498,109 +398,11 @@ for (var i in req.body.serve) {
   var ser = req.body.serve[i];
 console.log(ser);
   var serveObj = { food: ser['food'], quan: ser['number'] };
+
  bill.serve.push(serveObj);
 }
 
-/*
-    if (req.body.food1 != null)
-        order.serve.push({
-            food: req.body.food1,
-            quan: req.body.number1,
 
-
-        });
-    if (req.body.food2 != null)
-        order.serve.push({
-            food: req.body.food2,
-            quan: req.body.number2,
-
-        });
-    if (req.body.food3 != null)
-        order.serve.push({
-            food: req.body.food3,
-            quan: req.body.number3,
-
-        });
-    if (req.body.food4 != null)
-        order.serve.push({
-            food: req.body.food4,
-            quan: req.body.number4,
-
-        });
-    if (req.body.food5 != null)
-        order.serve.push({
-            food: req.body.food5,
-            quan: req.body.number5,
-
-        });
-    if (req.body.food6 != null)
-        order.serve.push({
-            food: req.body.food6,
-            quan: req.body.number6,
-
-        });
-    if (req.body.food7 != null)
-        order.serve.push({
-            food: req.body.food7,
-            quan: req.body.number7,
-
-        });
-    if (req.body.food8 != null)
-        order.serve.push({
-            food: req.body.food8,
-            quan: req.body.number8,
-
-        });
-    if (req.body.food9 != null)
-        order.serve.push({
-            food: req.body.food9,
-            quan: req.body.number9,
-
-        });
-    if (req.body.food16 != null)
-        order.serve.push({
-            food: req.body.food10,
-            quan: req.body.number10,
-
-        });
-    if (req.body.food11 != null)
-        order.serve.push({
-            food: req.body.food11,
-            quan: req.body.number11,
-
-        });
-    if (req.body.food12 != null)
-        order.serve.push({
-            food: req.body.food12,
-            quan: req.body.number12,
-
-        });
-    if (req.body.food13 != null)
-        order.serve.push({
-            food: req.body.food13,
-            quan: req.body.number13,
-
-        });
-    if (req.body.food14 != null)
-        order.serve.push({
-            food: req.body.food14,
-            quan: req.body.number14,
-
-        });
-    if (req.body.food15 != null)
-        order.serve.push({
-            food: req.body.food15,
-            quan: req.body.number15,
-
-        });
-    if (req.body.food16 != null)
-        order.serve.push({
-            food: req.body.food16,
-            quan: req.body.number16,
-
-        });
-
-*/
 
 
     bill.save(function(err) {
@@ -620,6 +422,80 @@ console.log(ser);
         res.json(orders);
     });
 });
+
+
+
+
+
+
+
+router.route('/bill/:bill_id')
+
+
+.get(function(req, res) {
+    Bill.findById(req.params.bill_id, function(err, bill) {
+        if (err)
+            res.send(err);
+        res.json(order);
+    });
+})
+
+
+.put(function(req, res) {
+    Order.findById(req.params.bill_id, function(err, bill) {
+
+        if (err)
+            res.send(err);
+
+        // create a new instance of the order model
+        bill.table = req.body.table;
+bill.cost = req.body.cost;
+
+
+//for(var i = 0;i<order.serve.length;i++)
+  bill.serve.splice(0, 0);
+console.log(bill.serve);
+bill.serve=[];
+serve=[];
+for (var i in req.body.serve) {
+
+   ser = req.body.serve[i];
+console.log(ser);
+//order.serve[i].remove();
+   serveObj = { food: ser['food'], quan: ser['number'] };
+ bill.serve.push(serveObj);
+}
+
+
+
+
+        bill.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json({
+                message: 'Order updated!'
+            });
+        });
+
+    });
+})
+
+
+.delete(function(req, res) {
+    Order.remove({
+        _id: req.params.order_id
+    }, function(err, order) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            message: 'Successfully deleted'
+        });
+    });
+});
+
+
 
 
 
@@ -824,105 +700,22 @@ router.route('/order/:order_id')
 
         // create a new instance of the order model
         order.table = req.body.table;
+order.cost = req.body.cost;
 
- order.cost = req.body.cost;
-        if (req.body.food1 != null)
-        order.serve.push({
-            food: req.body.food1,
-            quan: req.body.number1,
-status: req.body.status1
 
-        });
-    if (req.body.food2 != null)
-        order.serve.push({
-            food: req.body.food2,
-            quan: req.body.number2,
-status: req.body.status2
-        });
-    if (req.body.food3 != null)
-        order.serve.push({
-            food: req.body.food3,
-            quan: req.body.number3,
-status: req.body.status3
-        });
-    if (req.body.food4 != null)
-        order.serve.push({
-            food: req.body.food4,
-            quan: req.body.number4,
-status: req.body.status4
-        });
-    if (req.body.food5 != null)
-        order.serve.push({
-            food: req.body.food5,
-            quan: req.body.number5,
-status: req.body.status5
-        });
-    if (req.body.food6 != null)
-        order.serve.push({
-            food: req.body.food6,
-            quan: req.body.number6,
-status: req.body.status6
-        });
-    if (req.body.food7 != null)
-        order.serve.push({
-            food: req.body.food7,
-            quan: req.body.number7,
-status: req.body.status7
-        });
-    if (req.body.food8 != null)
-        order.serve.push({
-            food: req.body.food8,
-            quan: req.body.number8,
-status: req.body.status8
-        });
-    if (req.body.food9 != null)
-        order.serve.push({
-            food: req.body.food9,
-            quan: req.body.number9,
-status: req.body.status9
-        });
-    if (req.body.food16 != null)
-        order.serve.push({
-            food: req.body.food10,
-            quan: req.body.number10,
-status: req.body.status10
-        });
-    if (req.body.food11 != null)
-        order.serve.push({
-            food: req.body.food11,
-            quan: req.body.number11,
-status: req.body.status11
-        });
-    if (req.body.food12 != null)
-        order.serve.push({
-            food: req.body.food12,
-            quan: req.body.number12,
-status: req.body.status12
-        });
-    if (req.body.food13 != null)
-        order.serve.push({
-            food: req.body.food13,
-            quan: req.body.number13,
-status: req.body.status13
-        });
-    if (req.body.food14 != null)
-        order.serve.push({
-            food: req.body.food14,
-            quan: req.body.number14,
-status: req.body.status14
-        });
-    if (req.body.food15 != null)
-        order.serve.push({
-            food: req.body.food15,
-            quan: req.body.number15,
-status: req.body.status15
-        });
-    if (req.body.food16 != null)
-        order.serve.push({
-            food: req.body.food16,
-            quan: req.body.number16,
-status: req.body.status16
-        });
+//for(var i = 0;i<order.serve.length;i++)
+  order.serve.splice(0, 0);
+console.log(order.serve);
+order.serve=[];
+serve=[];
+for (var i in req.body.serve) {
+
+   ser = req.body.serve[i];
+console.log(ser);
+//order.serve[i].remove();
+   serveObj = { food: ser['food'], quan: ser['number'] };
+ order.serve.push(serveObj);
+}
 
 
 
@@ -956,23 +749,6 @@ status: req.body.status16
 
 
 
-
-
-
-/*
-router.route('/serve/:order_id/:serve_id')
-
-
-.get(function(req, res) {
-    Order.findOne({_id : req.params.order_id},{'serve.id' :req.params.serve_id}, function(err, order) {
-        if (err)
-            res.send(err);
-
-        res.json(order.serve);
-    });
-});
-
-*/
 router.route('/serve/:order_id/:serve_id')
 
 
@@ -1066,53 +842,6 @@ order.save(function(err) {
 
 
 });
-
-/*
-
-
-.put(function(req, res){
-Order.findOne({_id : req.params.order_id},function(err, order) {
- if (err)
-            res.send(err);
-
-order.food = req.body.food;
-order.quan = req.body.quan;
-oder.status = req.body.status;
-
-menu.save(function(err) {
-            if (err)
-                res.send(err);
-
-            res.json({
-                message: 'Menu updated!'
-            });
-});
-
-
-
-});
-
-.delete(function(req, res) {
-    User.remove({
-        _id: req.params.user_id
-    }, function(err, user) {
-        if (err)
-            res.send(err);
-
-        res.json({
-            message: 'Successfully deleted'
-        });
-    });
-});
-
-
-*/
-
-
-
-
-
-
 
 
 
