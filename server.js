@@ -5,6 +5,7 @@ var Feed = require('./app/models/feed');
 var Request = require('./app/models/request');
 var Bill = require('./app/models/bill');
 var User = require('./app/models/user');
+var Report = require('./app/models/report');
 var fs = require('fs');
 // BASE SETUP
 // =============================================================================
@@ -484,7 +485,7 @@ console.log(ser);
 
 .delete(function(req, res) {
     Bill.remove({
-        _id: req.params.order_id
+        _id: req.params.bill_id
     }, function(err, order) {
         if (err)
             res.send(err);
@@ -572,6 +573,109 @@ router.route('/request')
         res.json(requests);
     });
 });
+
+
+
+
+router.route('/report')
+
+
+.post(function(req, res) {
+
+    var report = new Report();
+    report.date = req.body.date;
+    report.sales = req.body.sales;
+
+
+
+
+    report.save(function(err) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            message: 'feedback success'
+        });
+    });
+
+}).get(function(req, res) {
+    Report.find(function(err, reports) {
+        if (err)
+            res.send(err);
+
+        res.json(reports);
+    });
+});
+
+
+
+router.route('/report/:report_id')
+
+
+.get(function(req, res) {
+    Report.findById(req.params.report_id, function(err,report) {
+        if (err)
+            res.send(err);
+        res.json(report);
+    });
+})
+
+
+.put(function(req, res) {
+    Report.findById(req.params.report_id, function(err, report) {
+
+        if (err)
+            res.send(err);
+
+     report.date = req.body.date;
+    report.sales = parseInt(report.sales)+parseInt(req.body.sales);
+
+
+
+        report.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json({
+                message: 'Report updated!'
+            });
+        });
+
+    });
+})
+
+
+.delete(function(req, res) {
+    Report.remove({
+        _id: req.params.report_id
+    }, function(err,report) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            message: 'Successfully deleted'
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -822,13 +926,22 @@ Order.findById(req.params.order_id, function(err, order) {
         if (err)
             res.send(err);
 
+serve=[];
+for (var i in req.body.serve) {
+  var ser = req.body.serve[i];
+console.log(ser);
+  var serveObj = { food: ser['food'], quan: ser['number'], status: ser['status'] };
+ order.serve.push(serveObj);
+}
+
+/*
 order.serve.push({
             food: req.body.food,
             quan: req.body.number,
 status: req.body.status
 
         });
-
+*/
 order.save(function(err) {
         if (err)
             res.send(err);
