@@ -551,6 +551,7 @@ router.route('/request')
 
     var request = new Request();
     request.type = req.body.type;
+request.table = req.body.table;
     request.comment = req.body.comment;
 
 

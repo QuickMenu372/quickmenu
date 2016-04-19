@@ -577,6 +577,109 @@ router.route('/request')
 
 
 
+router.route('/report')
+
+
+.post(function(req, res) {
+
+    var report = new Report();
+    report.date = req.body.date;
+    report.sales = req.body.sales;
+
+
+
+
+    report.save(function(err) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            message: 'feedback success'
+        });
+    });
+
+}).get(function(req, res) {
+    Report.find(function(err, reports) {
+        if (err)
+            res.send(err);
+
+        res.json(reports);
+    });
+});
+
+
+
+router.route('/report/:report_id')
+
+
+.get(function(req, res) {
+    Report.findById(req.params.report_id, function(err,report) {
+        if (err)
+            res.send(err);
+        res.json(report);
+    });
+})
+
+
+.put(function(req, res) {
+    Report.findById(req.params.report_id, function(err, report) {
+
+        if (err)
+            res.send(err);
+
+     report.date = req.body.date;
+    report.sales = parseInt(report.sales)+parseInt(req.body.sales);
+
+
+
+        report.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json({
+                message: 'Report updated!'
+            });
+        });
+
+    });
+})
+
+
+.delete(function(req, res) {
+    Report.remove({
+        _id: req.params.report_id
+    }, function(err,report) {
+        if (err)
+            res.send(err);
+
+        res.json({
+            message: 'Successfully deleted'
+        });
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.route('/menus/:menu_id')
 
 
