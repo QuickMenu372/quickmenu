@@ -8,7 +8,7 @@ cost:Number,
     serve: [{
         food:ObjectId,
         quan:Number,
-orderStatus:Number
+status:Number
       
     }]
 

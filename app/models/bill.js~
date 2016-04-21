@@ -2,7 +2,7 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema,ObjectId = Schema.ObjectId;
 
 var BillSchema =  new mongoose.Schema({
-    id:String,
+    table:Number,
     cost:Number,
     serve: [{
         food:ObjectId,

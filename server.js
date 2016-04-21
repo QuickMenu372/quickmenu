@@ -349,6 +349,7 @@ router.route('/order')
 
     var order = new Order();
     order.table = req.body.table;
+order.username = req.body.username;
 
  order.cost = req.body.cost;
 
@@ -395,6 +396,7 @@ router.route('/bill')
 .post(function(req, res) {
 
  var bill = new Bill();
+ bill.username = req.body.username;
     bill.table = req.body.table;
 
  bill.cost = req.body.cost;
@@ -454,6 +456,7 @@ router.route('/bill/:bill_id')
 
         // create a new instance of the order model
         bill.table = req.body.table;
+bill.username=req.body.username;
 bill.cost = req.body.cost;
 
 
@@ -556,6 +559,7 @@ router.route('/request')
     var request = new Request();
     request.type = req.body.type;
 request.table = req.body.table;
+request.username = req.body.username;
     request.comment = req.body.comment;
 
 
