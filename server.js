@@ -385,6 +385,10 @@ console.log(ser);
 
 
 
+
+
+
+
 router.route('/bill')
 
 
@@ -741,42 +745,44 @@ menu.offerDiscount = req.body.offerDiscount;
 
 
 
-/*
-
-
 router.route('/iosmenus/:menu_id')
+  .post(function(req,res)
+{
+var newName = req.body.name
+        newCost = req.body.cost
+        ,newVeg = req.body.veg
+        ,newType = req.body.type
+        ,newCategory = req.body.category
+        ,newPic = req.body.pic
+        ,newEnable = req.body.enable
+       ,newOfferEnable = req.body.offerEnable
+          ,newOfferDiscount = req.body.offerDiscount
+        ,newDescription = req.body.description;
 
-
-.post(function(req, res) {
-
-Menu.findOneAndUpdate({_id:req.params.menu_id}, function(err, menu) {
-
-        if (err)
-            res.send(err);
-
-        menu.name = req.body.name;
-        menu.cost = req.body.cost;
-        menu.veg = req.body.veg;
+     Menu.findByIdAndUpdate({
+       _id : req.params.menu_id
+     },{
+  name : newName,
+         cost : newCost,
+         veg :  newVeg ,
+         type : newType ,
+          category:newCategory,
+        pic:newPic,
+        enable:newEnable,
+      offerEnable: newOfferEnable,
+         offerDiscount: newOfferDiscount,
+        description: newDescription
      
-        menu.description = req.body.description;
 
-
-        menu.save(function(err) {
-            if (err)
-                res.send(err);
-
-            res.json({
-                message: 'Menu updated!'
-            });
-        });
-
-    });
-});
+     },{new : true},function(err,updatedUser) {
+       res.json(updatedUser);
+     });
+   });
 
 
 
 
-*/
+
 
 
 
