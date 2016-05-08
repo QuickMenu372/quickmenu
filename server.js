@@ -929,6 +929,97 @@ order.serve[i].remove();
 
 
 
+
+
+
+
+
+
+
+
+router.route('/iosserve/:order_id/:serve_id')
+
+
+// _id : req.params.menu_id
+.post(function(req,res){
+     var newFood = req.body.food
+     ,newNumber = req.body.number
+    
+     ,newStatus = req.body.status;
+     Order.findByIdAndUpdate({
+        _id : req.params.order_id
+     },{
+
+ //for(var i = 0;i<order.serve.length;i++){
+//if(order.serve[i]._id==req.params.serve_id){      
+//order.serve[i].food : newFood,
+//order.serve[i].quan : newNumber,
+//order.serve[i].status : newStatus
+//}/
+//}
+     
+     },{new : true},function(err,updatedUser) {
+var Serve=updatedUser;
+
+       res.json(updatedUser);
+
+for(var i = 0;i<updatedUser.serve.length;i++)
+if(updatedUser.serve[i]._id==req.params.serve_id){     
+console.log(i); 
+updatedUser.serve[i].food = newFood;
+updatedUser.serve[i].quan = newNumber;
+updatedUser.serve[i].status = newStatus;
+}
+ updatedUser.save(function(err) {
+            if (err)
+                res.send(err);
+
+            
+        }); 
+
+     });
+
+
+   });
+
+/*
+
+
+.put(function(req, res) {
+    Order.findOne({_id : req.params.order_id},function(err, order) {
+
+        if (err)
+            res.send(err);
+
+ for(var i = 0;i<order.serve.length;i++)
+if(order.serve[i]._id==req.params.serve_id){      
+order.serve[i].food = req.body.food;
+order.serve[i].quan = req.body.number;
+order.serve[i].status = req.body.status;
+}
+
+        order.save(function(err) {
+            if (err)
+                res.send(err);
+
+            res.json({
+                message: 'Order updated!'
+            });
+        });
+
+    });
+});
+
+
+*/
+
+
+
+
+
+
+
+
 router.route('/addorder/:order_id/')
 
 
